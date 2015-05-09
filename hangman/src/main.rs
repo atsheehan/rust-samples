@@ -1,7 +1,7 @@
 use std::io;
 
-fn mask_word<'a>(mask: &'a mut String, hidden: &str, letters: &Vec<char>) -> &'a mut String {
-    mask.clear();
+fn mask_word(hidden: &str, letters: &Vec<char>) -> String {
+    let mut mask = String::with_capacity(hidden.len());
 
     for c in hidden.chars() {
         if letters.contains(&c) {
@@ -19,13 +19,11 @@ fn main() {
 
     let mut guessed_letters: Vec<char> = Vec::new();
     let hidden = "rustacean";
-    let mut mask = String::new();
-
     let mut chances_remaining = 8;
 
     while chances_remaining >= 0 {
         println!("chances: {}", chances_remaining);
-        println!("word: {}", mask_word(&mut mask, hidden, &guessed_letters));
+        println!("word: {}", mask_word(hidden, &guessed_letters));
 
         let mut guess = String::new();
 
